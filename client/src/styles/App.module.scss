@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #5e6989;
+  --secondary-color: #000;
+}
+
+img {
+  @apply size-3.5;
+}
+
+p {
+  @apply ml-1;
+}
+
+button {
+  @apply outline-none border rounded-md;
+}
+
+.primary {
+  @apply py-2 px-6 text-white flex items-center bg-primary-color;
+}
+
+.secondary {
+  @apply flex justify-center items-center border-primary-color;
+
+  & {
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    -webkit-box-shadow: -1px 0px 25px -10px rgba(0, 0, 0, 0.66);
+    -moz-box-shadow: -1px 0px 25px -10px rgba(0, 0, 0, 0.66);
+    box-shadow: -1px 0px 25px -10px rgba(0, 0, 0, 0.66);
+  }
+
+  img {
+    filter: brightness(0%);
+    @apply size-10;
+  }
+}
+
+header {
+  @apply container mx-auto flex justify-between items-center mt-8;
+}
+
+h3 {
+  @apply font-bold text-2xl;
+}
+
+.desks {
+  @apply container mx-auto mt-28 grid grid-cols-4 gap-20;
+}
+
+.desk-element {
+  @apply font-bold border rounded-md py-20 flex justify-center cursor-pointer bg-violet-300 border-primary-color;
+
+  & {
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    -webkit-box-shadow: -1px 0px 25px -10px rgba(0, 0, 0, 0.66);
+    -moz-box-shadow: -1px 0px 25px -10px rgba(0, 0, 0, 0.66);
+    box-shadow: -1px 0px 25px -10px rgba(0, 0, 0, 0.66);
+  }
+}
+
+.desk-name {
+  @apply text-2xl text-center;
+}
