@@ -12,6 +12,7 @@ import {
 import { getAllTasksByListId } from "../requests/task.requests";
 import { setAllTasks } from "../redux/reducers/taskSlice";
 import List from "../components/List";
+import ModalWindow from "../components/ModalWindow";
 
 interface IState {
   actions: string;
@@ -41,13 +42,7 @@ function DeskPage() {
 
   return (
     <div className="desk">
-      <Button
-        clickedParam={Number(params.id)}
-        // onClick={() => {
-        //   ListCreationPrimary.args?.onClick(Number(params.id));
-        // }}
-        {...ListCreationPrimary.args}
-      />
+      <Button clickedParam={Number(params.id)} {...ListCreationPrimary.args} />
 
       {lists.map((list, index) => {
         return (

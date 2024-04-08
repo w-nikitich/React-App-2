@@ -7,6 +7,10 @@
   --secondary-color: #000;
 }
 
+input {
+  @apply text-black;
+}
+
 img {
   @apply size-3.5;
 }
@@ -77,7 +81,9 @@ h3 {
 }
 
 .desk-block {
-  @apply border rounded-md bg-violet-300 border-primary-color cursor-pointer;
+  position: relative;
+  @apply border rounded-md bg-violet-300 border-primary-color
+    cursor-pointer;
 
   & {
     transition: all 0.3s;
@@ -100,7 +106,6 @@ h3 {
 
 .desk {
   @apply container mx-auto flex mt-7;
-  overflow-x: scroll;
 }
 
 .create-list {
@@ -138,6 +143,14 @@ h3 {
       }
     }
   }
+}
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
 }
 
 .list-details {
@@ -233,11 +246,11 @@ h3 {
 }
 
 .task__move-list {
-  display: none;
   z-index: 2;
   position: absolute;
   top: 74%;
   width: 100%;
+  left: 0;
   @apply bg-slate-300 rounded-md py-4;
 
   p {
@@ -248,5 +261,143 @@ h3 {
     &:last-of-type {
       border-bottom: var(--primary-color) solid 1px;
     }
+  }
+}
+
+.actions-block {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  right: -30%;
+  width: 30%;
+  @apply flex items-center bg-white rounded border
+    border-primary-color;
+
+  p {
+    margin-left: 5px;
+  }
+
+  &:not(:first-of-type) {
+    @apply mt-5;
+  }
+}
+
+.modal-window {
+  position: absolute;
+  top: 10vw;
+  width: 60vw;
+  left: 20vw;
+  z-index: 3;
+  @apply bg-white border border-primary-color rounded-md;
+}
+
+.modal-window__info {
+  @apply flex justify-between;
+}
+
+.modal-window__data-block {
+  @apply pl-20;
+}
+
+.modal-window__close-block {
+  position: relative;
+  @apply py-5 bg-primary-color;
+}
+
+.modal-window__activity-block {
+  width: 40%;
+  @apply bg-slate-400;
+}
+
+.modal-window__name-block {
+  @apply flex justify-between pt-4;
+}
+
+.modal-window__name {
+  @apply text-3xl font-bold;
+}
+
+.modal-window__edit-block {
+  @apply border border-primary-color rounded-md px-6 py-2 ml-32;
+}
+
+.edit {
+  @apply border border-primary-color rounded-md;
+}
+
+.modal-window__details {
+  @apply flex mt-5;
+}
+
+.modal-window__details-title {
+  width: 40%;
+  @apply flex items-center whitespace-nowrap;
+}
+
+.modal-window__data {
+  @apply flex justify-start text-start;
+}
+
+.modal-window__description-block {
+  @apply mt-5;
+}
+
+.modal-window__status {
+  position: relative;
+}
+
+.modal-window__data {
+  position: relative;
+}
+
+.modal-window__status-change {
+  position: absolute;
+  width: 10vw;
+  z-index: 2;
+  top: 20px;
+  cursor: pointer;
+  @apply bg-slate-300;
+}
+
+.modal-window__priority-change {
+  z-index: 2;
+  position: absolute;
+  cursor: pointer;
+  @apply bg-slate-300;
+}
+
+.modal-window__description {
+  width: 90%;
+  height: 70%;
+}
+
+.react-calendar {
+  width: 40%;
+}
+
+.close {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 20%;
+  left: 95%;
+  cursor: pointer;
+
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 20px;
+    @apply bg-white;
+  }
+
+  &::after {
+    transform: rotate(45deg);
+  }
+
+  &::before {
+    transform: rotate(-45deg);
   }
 }

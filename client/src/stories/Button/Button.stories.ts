@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import plusIcon from "../assets/plus_icon.png";
 import { createdDesk } from "../../requests/desk.requests";
 import "../../styles/App.module.scss";
-import { createList } from "../../requests/list.requests";
+import { createList, updateList } from "../../requests/list.requests";
 import { createTask } from "../../requests/task.requests";
 
 const meta = {
