@@ -11,12 +11,12 @@ img {
   @apply size-3.5;
 }
 
-p {
-  @apply ml-1;
-}
-
 button {
   @apply outline-none border rounded-md;
+
+  p {
+    @apply ml-1;
+  }
 }
 
 .primary {
@@ -50,12 +50,34 @@ h3 {
   @apply font-bold text-2xl;
 }
 
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 5%;
+  margin-top: 5%;
+
+  span {
+    display: block;
+    margin-bottom: 2px;
+
+    &::after {
+      display: block;
+      content: "";
+      background-color: #000000;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+    }
+  }
+}
+
 .desks {
   @apply container mx-auto mt-28 grid grid-cols-4 gap-20;
 }
 
-.desk-element {
-  @apply font-bold border rounded-md py-20 flex justify-center cursor-pointer bg-violet-300 border-primary-color;
+.desk-block {
+  @apply border rounded-md bg-violet-300 border-primary-color cursor-pointer;
 
   & {
     transition: all 0.3s;
@@ -68,6 +90,163 @@ h3 {
   }
 }
 
+.desk-element {
+  @apply font-bold py-20 flex justify-center;
+}
+
 .desk-name {
   @apply text-2xl text-center;
+}
+
+.desk {
+  @apply container mx-auto flex mt-7;
+  overflow-x: scroll;
+}
+
+.create-list {
+  @apply bg-white h-20;
+  flex: none;
+  margin-right: 30px;
+
+  img {
+    filter: brightness(0%);
+    @apply size-10;
+  }
+}
+
+.list {
+  width: 15vw;
+  &:not(:last-of-type) {
+    margin-right: 30px;
+  }
+}
+
+.list-element {
+  position: relative;
+  width: 100%;
+  @apply bg-primary-color rounded-md flex items-center justify-center py-3;
+
+  .actions {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    @apply mt-0 mr-0;
+
+    span {
+      &:after {
+        background-color: #fff;
+      }
+    }
+  }
+}
+
+.list-details {
+  @apply flex justify-between text-white;
+}
+
+.list-amount {
+}
+
+.list-name {
+  @apply mr-4 flex-none;
+}
+
+.create-task {
+  width: 100%;
+  @apply bg-white flex justify-center mt-1 py-3;
+
+  img {
+    filter: brightness(0%);
+  }
+}
+
+.task__block {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.5s;
+  @apply flex flex-col rounded border border-primary-color
+    p-4;
+
+  &:first-child {
+    @apply mt-4;
+  }
+
+  &:not(:last-child) {
+    @apply mb-4;
+  }
+
+  &:hover {
+    -webkit-box-shadow: -1px 0px 25px -10px rgba(0, 0, 0, 0.66);
+    -moz-box-shadow: -1px 0px 25px -10px rgba(0, 0, 0, 0.66);
+    box-shadow: -1px 0px 25px -10px rgba(0, 0, 0, 0.66);
+  }
+}
+
+.task__name-block {
+  @apply flex justify-between items-center font-bold;
+
+  .actions {
+    @apply mt-0 mr-0;
+  }
+}
+
+.task__description {
+  @apply text-slate-500 mt-2;
+}
+
+.task__date-block,
+.task__priority-block {
+  @apply flex items-center;
+
+  img {
+    @apply brightness-0;
+  }
+
+  p {
+    @apply ml-3 text-slate-600;
+  }
+}
+
+.task__priority-block {
+  width: 50%;
+  @apply bg-slate-300 rounded-xl pl-3 mt-2;
+
+  .low {
+    width: 10px;
+    height: 10px;
+    @apply bg-slate-400 rounded-xl;
+  }
+
+  .medium {
+    @apply bg-slate-500 rounded-xl;
+  }
+
+  .high {
+    @apply bg-slate-600 rounded-xl;
+  }
+}
+
+.task__move {
+  position: relative;
+  cursor: pointer;
+  @apply mt-2 bg-slate-300 rounded-md py-2 px-3;
+}
+
+.task__move-list {
+  display: none;
+  z-index: 2;
+  position: absolute;
+  top: 74%;
+  width: 100%;
+  @apply bg-slate-300 rounded-md py-4;
+
+  p {
+    padding-left: 5px;
+    border-top: var(--primary-color) solid 1px;
+    cursor: pointer;
+
+    &:last-of-type {
+      border-bottom: var(--primary-color) solid 1px;
+    }
+  }
 }

@@ -15,8 +15,12 @@ export class ListsService {
     });
   }
 
-  async findOne(id: number): Promise<Lists> {
+  async findOneById(id: number): Promise<Lists> {
     return this.listsRepository.findOne<Lists>({ where: { id } });
+  }
+
+  async findAllByDeskId(deskId: number): Promise<Lists[]> {
+    return this.listsRepository.findAll<Lists>({ where: { deskId: deskId } });
   }
 
   async create(data: {
