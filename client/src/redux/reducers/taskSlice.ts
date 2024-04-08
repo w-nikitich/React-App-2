@@ -42,7 +42,7 @@ export const tasksSlice = createSlice({
         description: action.payload.description,
       });
     },
-    updateTask: (
+    updateTaskData: (
       state,
       action: PayloadAction<{ id: number; updatedTask: any }>
     ) => {
@@ -62,7 +62,7 @@ export const tasksSlice = createSlice({
   },
 });
 
-export const { setAllTasks, updateTask, createNewTask, resetTask } =
+export const { setAllTasks, updateTaskData, createNewTask, resetTask } =
   tasksSlice.actions;
 
 export default tasksSlice.reducer;

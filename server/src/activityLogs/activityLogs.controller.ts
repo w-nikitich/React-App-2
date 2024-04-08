@@ -11,9 +11,9 @@ export class ActivityLogsController {
     return this.activityLogsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: number): object {
-    return this.activityLogsService.findOne(id);
+  @Get(':taskId')
+  findMany(@Param('taskId') taskId: number): object {
+    return this.activityLogsService.findMany(taskId);
   }
 
   @Post()

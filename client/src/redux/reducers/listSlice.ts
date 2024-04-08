@@ -36,7 +36,7 @@ export const ListsSlice = createSlice({
         amount: action.payload.amount,
       });
     },
-    updateList: (state, action: PayloadAction<{ data: any }>) => {
+    updateListData: (state, action: PayloadAction<{ data: any }>) => {
       const listIndex = state.lists.findIndex(
         (list) => list.id === action.payload.data.id
       );
@@ -54,7 +54,7 @@ export const ListsSlice = createSlice({
   },
 });
 
-export const { createList, updateList, getAllLists, resetList } =
+export const { createList, updateListData, getAllLists, resetList } =
   ListsSlice.actions;
 
 export default ListsSlice.reducer;

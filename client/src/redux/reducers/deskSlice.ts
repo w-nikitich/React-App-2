@@ -33,10 +33,7 @@ export const DesksSlice = createSlice({
         amount: action.payload.amount,
       });
     },
-    // recordDesks: (state, action: PayloadAction<Desk[]>) => {
-    //   state.desks = action.payload;
-    // },
-    updateDesk: (state, action: PayloadAction<{ data: any }>) => {
+    updateDeskData: (state, action: PayloadAction<{ data: any }>) => {
       const deskIndex = state.desks.findIndex(
         (desk) => desk.id === action.payload.data.id
       );
@@ -54,7 +51,7 @@ export const DesksSlice = createSlice({
   },
 });
 
-export const { createDesk, updateDesk, getDesks, resetDesk } =
+export const { createDesk, updateDeskData, getDesks, resetDesk } =
   DesksSlice.actions;
 
 export default DesksSlice.reducer;

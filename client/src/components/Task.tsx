@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import calendarIcon from "../assets/calendar_icon.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import Actions from "./Actions";
+import { DeleteTask } from "../stories/Actions/Actions.stories";
+import ModalWindow from "./ModalWindow";
+import { updateList } from "../requests/list.requests";
+import { updateTask } from "../requests/task.requests";
+import { updateListData } from "../redux/reducers/listSlice";
 
 type taskProps = {
   taskId: number;
@@ -9,7 +15,16 @@ type taskProps = {
   taskDescription?: string;
   taskDate?: string;
   taskPriority?: string;
+  listId: number;
+  handleTaskId?: any;
 };
+
+interface IState {
+  actions: string;
+  isActionsOpened: boolean;
+  moveTo: string;
+  isMoveMenuOpened: boolean;
+}
 
 function Task({
   taskId,
@@ -17,37 +32,72 @@ function Task({
   taskDescription,
   taskDate,
   taskPriority,
+  listId,
+  handleTaskId,
 }: taskProps) {
   const lists = useSelector((state: RootState) => state.list.lists);
   const dispatch = useDispatch();
 
+  const updateState = (newState: Partial<IState>): void =>
+    setState((prevState) => ({ ...prevState, ...newState }));
+  const [state, setState] = useState<IState>({
+    actions: "hidden",
+    isActionsOpened: false,
+    moveTo: "hidden",
+    isMoveMenuOpened: false,
+  });
+
+  useEffect(() => {
+    if (state.isActionsOpened) {
+      updateState({ actions: "visible" });
+    } else {
+      updateState({ actions: "hidden" });
+    }
+  }, [state.isActionsOpened]);
+
+  useEffect(() => {
+    console.log(state.isMoveMenuOpened);
+    if (state.isMoveMenuOpened) {
+      updateState({ moveTo: "visible" });
+    } else {
+      updateState({ moveTo: "hidden" });
+    }
+  }, [state.isMoveMenuOpened]);
+
+  function handleActions() {
+    updateState({ isActionsOpened: !state.isActionsOpened });
+  }
+
+  function handleClick() {
+    updateState({ isMoveMenuOpened: !state.isMoveMenuOpened });
+  }
+
   return (
-    <div className="task__block">
+    <div
+      className="task__block"
+      onClick={(e) => {
+        e.stopPropagation();
+        handleTaskId(taskId);
+      }}
+    >
       <div className="task__name-block">
         <p className="task__name">{taskName}</p>
 
         <p
           className="actions"
-          onClick={
-            () => console.log("log")
-            // handleActions()
-          }
+          onClick={(e) => {
+            e.stopPropagation();
+            handleActions();
+          }}
         >
           <span></span>
           <span></span>
           <span></span>
         </p>
 
-        {/* {actions === "visible" ? (
-          <Actions
-            visibility={actions}
-            isTaskList={false}
-            isEditMode={isEditMode}
-            setIsEditMode={updateState}
-            deleteTask={deleteTask}
-            nameOfBlock={"task"}
-          />
-        ) : null} */}
+        {state.actions === "visible" ? (
+          <Actions id={taskId} {...DeleteTask.args} />
+        ) : null}
       </div>
 
       <div
@@ -75,15 +125,24 @@ function Task({
         </div>
 
         {/*  onClick={handleClick} */}
-        <div className="task__move">
+        <div className="task__move" onClick={() => handleClick()}>
           <p>Move to:</p>
           <span></span>
 
           {/* add ${moveTo} to class*/}
-          <div className={`task__move-list`}>
+          <div className={`task__move-list ${state.moveTo}`}>
             {lists.map((list: any) => {
-              // onClick={() => updateList(id, list.id)}
-              return <p>{list.name}</p>;
+              return (
+                <p
+                  onClick={() => {
+                    updateTask(taskId, { listId: list.id }).then((res) => {
+                      updateListData(res);
+                    });
+                  }}
+                >
+                  {list.name}
+                </p>
+              );
             })}
           </div>
         </div>

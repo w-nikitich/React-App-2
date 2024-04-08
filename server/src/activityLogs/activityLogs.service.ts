@@ -15,8 +15,10 @@ export class ActivityLogsService {
     });
   }
 
-  async findOne(id: number): Promise<ActivityLogs> {
-    return this.activityLogsRepository.findOne<ActivityLogs>({ where: { id } });
+  async findMany(taskId: number): Promise<ActivityLogs[]> {
+    return this.activityLogsRepository.findAll<ActivityLogs>({
+      where: { taskId: taskId },
+    });
   }
 
   async create(data: updateActivityLogsRequest): Promise<ActivityLogs> {
