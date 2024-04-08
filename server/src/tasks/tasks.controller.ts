@@ -19,7 +19,12 @@ export class TasksController {
     return this.tasksService.findAll();
   }
 
-  @Get(':id')
+  @Get('byListId/:listId')
+  findAllByListId(@Param('listId') listId: number): object {
+    return this.tasksService.findAllByListId(listId);
+  }
+
+  @Get('byId/:id')
   findOne(@Param('id') id: number): object {
     return this.tasksService.findOne(id);
   }

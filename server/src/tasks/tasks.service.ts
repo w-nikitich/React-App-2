@@ -15,6 +15,10 @@ export class TasksService {
     });
   }
 
+  async findAllByListId(listId: number): Promise<Tasks[]> {
+    return this.tasksRepository.findAll<Tasks>({ where: { listId: listId } });
+  }
+
   async findOne(id: number): Promise<Tasks> {
     return this.tasksRepository.findOne<Tasks>({ where: { id } });
   }

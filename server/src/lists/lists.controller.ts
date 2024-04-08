@@ -19,9 +19,14 @@ export class ListsController {
     return this.listsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: number): object {
-    return this.listsService.findOne(id);
+  @Get('byDeskId/:deskId')
+  findAllByDeskId(@Param('deskId') deskId: number): object {
+    return this.listsService.findAllByDeskId(deskId);
+  }
+
+  @Get('byId/:id')
+  findOneById(@Param('id') id: number): object {
+    return this.listsService.findOneById(id);
   }
 
   @Post()

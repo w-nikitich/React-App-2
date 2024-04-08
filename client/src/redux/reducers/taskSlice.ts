@@ -22,8 +22,25 @@ export const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    createNewTask: (state, action: PayloadAction<{ createdTask: any }>) => {
-      state.tasks.push(action.payload.createdTask);
+    createNewTask: (
+      state,
+      action: PayloadAction<{
+        id: number;
+        listId: number;
+        name: string;
+        date: string;
+        priority: string;
+        description: string;
+      }>
+    ) => {
+      state.tasks.push({
+        id: action.payload.id,
+        listId: action.payload.listId,
+        name: action.payload.name,
+        date: action.payload.date,
+        priority: action.payload.priority,
+        description: action.payload.description,
+      });
     },
     updateTask: (
       state,
@@ -34,7 +51,7 @@ export const tasksSlice = createSlice({
       );
       state.tasks[taskId] = action.payload.updatedTask;
     },
-    updateAllTasks: (state, action: PayloadAction<Task[]>) => {
+    setAllTasks: (state, action: PayloadAction<Task[]>) => {
       state.tasks = action.payload;
     },
     resetTask: (state, action: PayloadAction<{ id: number }>) => {
@@ -45,7 +62,7 @@ export const tasksSlice = createSlice({
   },
 });
 
-export const { updateAllTasks, updateTask, createNewTask, resetTask } =
+export const { setAllTasks, updateTask, createNewTask, resetTask } =
   tasksSlice.actions;
 
 export default tasksSlice.reducer;
