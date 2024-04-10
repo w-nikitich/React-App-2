@@ -726,6 +726,12 @@ h3 {
   gap: 5rem;
 }
 
+.desk-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .desk-block {
   position: relative;
   cursor: pointer;
