@@ -44,6 +44,7 @@ function Desk(desk: any, deskId: number) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [name, setName] = useState(desk.desk.name);
 
+  const lists = useSelector((state: RootState) => state.list.lists);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,6 +54,18 @@ function Desk(desk: any, deskId: number) {
       setActions("hidden");
     }
   }, [isActionsOpened]);
+
+  function findAmount(deskId: number) {
+    let amount = 0;
+
+    lists.forEach((list) => {
+      if (list?.deskId === deskId) {
+        amount++;
+      }
+    });
+
+    return amount;
+  }
 
   function openDesk() {
     navigate(`/desk/${desk.deskId}`);
@@ -112,7 +125,9 @@ function Desk(desk: any, deskId: number) {
           ) : (
             <h2 className="desk-name">{desk.desk.name}</h2>
           )}
-          <p className="desk-amount">You have {desk.desk.amount} lists here</p>
+          <p className="desk-amount">
+            You have {findAmount(desk.deskId)} lists here
+          </p>
         </div>
       </div>
     </div>
